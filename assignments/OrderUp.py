@@ -1,0 +1,1 @@
+#Add a class method or static method
