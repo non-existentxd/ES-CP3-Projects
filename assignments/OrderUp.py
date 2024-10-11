@@ -2,11 +2,11 @@ class DinerOrder:
     def __init__(self):
         # Initialize the menu and order
         self.menu = {
-            "drinks": {"Water": 0, "Soda": 2.00, "Coffee": 3.00},
-            "appetizers": {"Fries": 3.00, "Salad": 4.00},
-            "main_courses": {"Burger": 8.00, "Steak": 15.00, "Chicken Sandwich": 9.00},
-            "sides": {"Mashed Potatoes": 2.50, "Vegetables": 2.50, "Rice": 2.00},
-            "desserts": {"Ice Cream": 4.00, "Cake": 5.00}
+            "drinks": {"Water": 0, "Soda": 2.00, "Coffee": 3.00, "Juice": 2.50},
+            "appetizers": {"Fries": 3.00, "Salad": 4.00, "Chicken Nuggets": 4.00},
+            "main_courses": {"Burger": 8.00, "Steak": 15.00, "Chicken Sandwich": 9.00, "Pizza": 11.00},
+            "sides": {"Mashed Potatoes": 2.50, "Vegetables": 2.50, "Rice": 2.00, "Soup": 3.00},
+            "desserts": {"Ice Cream": 4.00, "Cake": 5.00, "Float": 4.50, "Dessert of the week": 5.00}
         }
         self.order = {
             "drink": None,
@@ -17,9 +17,11 @@ class DinerOrder:
             "dessert": None
         }
 
+
     def print_menu(self):
         # Print the available menu
-        print("Menu:")
+        print(" ")
+        print("This is our Menu:")
         for category, items in self.menu.items():
             print(f"\n{category.capitalize()}:")
             for item, price in items.items():
@@ -28,6 +30,9 @@ class DinerOrder:
     def take_order(self):
         # Take the user's order for each category
         self.print_menu()
+        print(" ")
+        print("Hello my name is non_existent :) , I wil be your waiter for today! :D")
+        input("What is your name?: ")
         print("\nPlease place your order (press Enter to skip a category):")
 
         self.order["drink"] = self.get_order_item("drink", "Drink")
@@ -37,7 +42,7 @@ class DinerOrder:
         self.order["side2"] = self.get_order_item("side2", "Side 2")
         self.order["dessert"] = self.get_order_item("dessert", "Dessert")
 
-    
+
     def get_order_item(self, category_key, display_name):
         # Get item from user and check if it's on the menu
         user_input = input(f"{display_name}: ")
@@ -47,6 +52,7 @@ class DinerOrder:
                     return user_input
             print(f"Sorry, {user_input} is not on the menu.")
         return None
+    
 
     def print_order(self):
         # Print the user's current order
@@ -83,16 +89,18 @@ class DinerOrder:
             else:
                 print(f"Sorry, {new_item} is not on the menu.")
         else:
-            print("Invalid category.")
+            print("This category is invalid...")
 
     def place_order(self):
-        # Place the user's order and print total
         if self.is_order_valid():
             self.print_order()
             total = self.calculate_total()
-            print(f"\nYour total is: ${total:.2f}")
+            print(f"\nThat would be: ${total:.2f}")
+            total = self.calculate_total() *0.07
+            FullPayment = total + self.calculate_total()
+            print(f"\nYour total with taxes is: $ {FullPayment:.2f}")
         else:
-            print("You must order at least one item before placing your order.")
+            print("You have to order at least one item before placing your order.")
 
 diner = DinerOrder()
 diner.take_order()
