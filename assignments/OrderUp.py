@@ -1,6 +1,7 @@
 class DinerOrder:
+    tax_rate = 0.07
+
     def __init__(self):
-        # Initialize the menu and order
         self.menu = {
             "drinks": {"Water": 0, "Soda": 2.00, "Coffee": 3.00, "Juice": 2.50},
             "appetizers": {"Fries": 3.00, "Salad": 4.00, "Chicken Nuggets": 4.00},
@@ -16,55 +17,79 @@ class DinerOrder:
             "side2": None,
             "dessert": None
         }
+        self.extras = {}  
 
+    @classmethod
+    # This will modify le menu :)
+    def modmenu(cls, category, item, price):
+        if category in cls.menu:
+            cls.menu[category][item] = price
+        else:
+            cls.menu[category] = {item: price}
+        print(f"Menu updated: {item} added to {category}.")
+
+    @staticmethod
+    # People need to learn that they need to pay taxes, which is why i put taxes for the static method :)
+    def tax(amount):
+        # HEHE TAXES >:)
+        return amount * DinerOrder.tax_rate
 
     def print_menu(self):
-        # Print the available menu
         print(" ")
-        print("This is our Menu:")
+        print("Welcome to NONE EXISTENT😎, a non existent Restaurant!!!!!!!")
+        print("This is our Menu 😁:")
         for category, items in self.menu.items():
             print(f"\n{category.capitalize()}:")
             for item, price in items.items():
                 print(f"{item}: ${price:.2f}")
 
-    def take_order(self):
-        # Take the user's order for each category
+    def takeorder(self):
+        #This will take the order of the user
         self.print_menu()
         print(" ")
-        print("Hello my name is non_existent :) , I wil be your waiter for today! :D")
+        print("Hello, my name is non_existent :) , I will be your waiter for today! :D")
         input("What is your name?: ")
         print("\nPlease place your order (press Enter to skip a category):")
 
-        self.order["drink"] = self.get_order_item("drink", "Drink")
-        self.order["appetizer"] = self.get_order_item("appetizer", "Appetizer")
-        self.order["main_course"] = self.get_order_item("main_course", "Main Course")
-        self.order["side1"] = self.get_order_item("side1", "Side 1")
-        self.order["side2"] = self.get_order_item("side2", "Side 2")
-        self.order["dessert"] = self.get_order_item("dessert", "Dessert")
+        self.order["drink"] = self.get_order("drink", "Drink")
+        if self.order["drink"] in ["Soda", "Water"]:
+            self.extras["ice"] = input("Would you like ice with your drink? (yes/no): ").lower()
 
+        self.order["appetizer"] = self.get_order("appetizer", "Appetizer")
 
-    def get_order_item(self, category_key, display_name):
+        self.order["main_course"] = self.get_order("main_course", "Main Course")
+        if self.order["main_course"] == "Burger":
+            self.extras["doneness"] = input("How would you like your burger? (well done, medium rare): ").lower()
+
+        self.order["side1"] = self.get_order("side1", "Side 1")
+        self.order["side2"] = self.get_order("side2", "Side 2")
+        self.order["dessert"] = self.get_order("dessert", "Dessert")
+
+    def get_order(self, category_key, display_name):
         # Get item from user and check if it's on the menu
         user_input = input(f"{display_name}: ")
         if user_input:
             for category, items in self.menu.items():
                 if user_input in items:
                     return user_input
-            print(f"Sorry, {user_input} is not on the menu.")
+            print(f"Sorry, {user_input} is not on the menu :(")
         return None
     
-
     def print_order(self):
-        # Print the user's current order
+        # Print the user's current order with the customizations
         print("\nYour current order:")
         for category, item in self.order.items():
             if item:
                 print(f"{category.capitalize()}: {item}")
+        if self.extras:
+            print("\nCustomizations:")
+            for extra, value in self.extras.items():
+                print(f"{extra.capitalize()}: {value}")
         if not any(self.order.values()):
-            print("You haven't ordered anything yet.")
+            print("You haven't ordered anything yet... Why T-T")
 
     def calculate_total(self):
-        # This wil calculate the total price of what the uer wants to order
+        # This will alculate the total price of the user's order
         total = 0.0
         for category, item in self.order.items():
             if item:
@@ -73,12 +98,12 @@ class DinerOrder:
                         total += items[item]
         return total
 
-    def is_order_valid(self):
-        # Ensure that at least one item has been ordered
+    def order_valid(self):
+        # This makes sure that the order is all valid cuz why not
         return any(self.order.values())
 
     def change_item(self):
-        # This wil allow the user to change their order
+        # This will allow the user to change their order
         self.print_order()
         category = input("\nWhich item would you like to change (drink, appetizer, main_course, side1, side2, dessert)? ").lower()
         if category in self.order:
@@ -92,21 +117,22 @@ class DinerOrder:
             print("This category is invalid...")
 
     def place_order(self):
-        if self.is_order_valid():
+        if self.order_valid():
             self.print_order()
             total = self.calculate_total()
-            print(f"\nThat would be: ${total:.2f}")
-            total = self.calculate_total() *0.07
-            FullPayment = total + self.calculate_total()
-            print(f"\nYour total with taxes is: $ {FullPayment:.2f}")
+            print(f"\nYour total without tax is: ${total:.2f}")
+            tax = DinerOrder.tax(total)
+            FullPayment = total + tax
+            print(f"Your total with taxes is: ${FullPayment:.2f}")
         else:
-            print("You have to order at least one item before placing your order.")
+            print("You have to order at least one item before placing your order cuz that aint fair ye know.")
+
+
 
 diner = DinerOrder()
-diner.take_order()
+diner.takeorder()
 diner.print_order()
 diner.place_order()
-
 
 diner.change_item()
 diner.place_order()
