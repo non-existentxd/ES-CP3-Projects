@@ -6,6 +6,8 @@ class PetStore:
         self.featured_pet = None
 
     def add_pet(self, animal):
+        #assert will check if statement is true and stop code if false
+        #isinstance is like isnum (isnumeric) it just checks if the itme is an instance of the class given
         assert isinstance(animal, Animal)
         self.animals.append(animal)
 
@@ -75,6 +77,9 @@ class Fish(Animal):
     pass
 
 class Cat(Mammal):
+    def __init__(self, name, diet):
+        super().__init__(name)
+        self.diet = diet
     diet = "mice"
 
 class Dog(Mammal):
