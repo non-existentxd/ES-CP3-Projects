@@ -1,5 +1,5 @@
+# dessert.py
 
-#super class
 class DessertItem:
     def __init__(self, name: str = ''):
         self.name = name
@@ -32,3 +32,14 @@ class Sundae(IceCream):
         super().__init__(name, scoop_count, price_per_scoop)
         self.topping_name = topping_name
         self.topping_price = topping_price
+
+
+class Order:
+    def __init__(self):
+        self.order = []
+
+    def add(self, item: DessertItem):
+        self.order.append(item)
+
+    def __len__(self):
+        return len(self.order)
