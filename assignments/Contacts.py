@@ -1,3 +1,5 @@
+
+#polymorphism for this assignment
 class Contacts:
     def __init__(self):
         self.view = 'quit'
