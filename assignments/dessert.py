@@ -1,5 +1,3 @@
-# dessert.py
-
 class DessertItem:
     def __init__(self, name: str = ''):
         self.name = name
@@ -35,11 +33,12 @@ class Sundae(IceCream):
 
 
 class Order:
-    def __init__(self):
-        self.order = []
-
-    def add(self, item: DessertItem):
-        self.order.append(item)
-
-    def __len__(self):
-        return len(self.order)
+    def __len__(Candy, Cookie, IceCream, Sundae):
+        def main():
+            Candy("CandyCorn", 1.5, .25)
+            Candy("Gummy Bears", .25, .35)
+            Cookie("Chocolate Chip", 6, 3.99)
+            IceCream("Pistachio", 2, .79)
+            Sundae("Vanilla", 3, .69, "HotFudge", 1.29)
+            Cookie("Oatmeal Raisin", 2, 3.45)
+            return Order
