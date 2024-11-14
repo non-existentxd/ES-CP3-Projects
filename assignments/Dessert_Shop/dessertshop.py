@@ -1,6 +1,6 @@
 # dessertshoppppp!!!
 
-from dessert import Candy, Cookie, IceCream, Sundae, Order
+from assignments.Dessert_Shop.dessert import Candy, Cookie, IceCream, Sundae, Order
 
 def main():
 

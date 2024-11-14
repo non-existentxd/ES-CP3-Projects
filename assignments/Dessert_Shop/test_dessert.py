@@ -1,4 +1,4 @@
-from dessert import DessertItem, Candy, Cookie, IceCream, Sundae
+from assignments.Dessert_Shop.dessert import DessertItem, Candy, Cookie, IceCream, Sundae
 
 def test_dessert_item():
     dessert = DessertItem("Generic Dessert")
