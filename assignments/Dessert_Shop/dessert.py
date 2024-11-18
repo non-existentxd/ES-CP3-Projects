@@ -9,11 +9,9 @@ class DessertItem(ABC):
 
     @abstractmethod
     def calculate_cost(self) -> float:
-        """Abstract method to calculate the cost of the item."""
         pass
 
     def calculate_tax(self) -> float:
-        """Calculate the tax based on the item's cost."""
         return round(self.calculate_cost() * (self.tax_percent / 100), 2)
 
 
