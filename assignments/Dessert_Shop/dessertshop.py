@@ -1,9 +1,7 @@
-# dessertshoppppp!!!
-
-from assignments.Dessert_Shop.dessert import Candy, Cookie, IceCream, Sundae, Order
+import receipt
+from dessert import Candy, Cookie, IceCream, Sundae, Order
 
 def main():
-
     order = Order()
     order.add(Candy("Candy Corn", 1.5, 0.25))
     order.add(Candy("Gummy Bears", 0.25, 0.35))
@@ -14,8 +12,17 @@ def main():
 
     for item in order.order:
         print(item.name)
-    print("Total number of items in order:", len(order))
+    print(f"Total number of items in order: {len(order)}")
 
+    data = [
+        [item.name, f"${item.calculate_cost():.2f}", f"${item.calculate_tax():.2f}"]
+        for item in order.order
+    ]
+    data.append(["Order Subtotals", f"${order.order_cost():.2f}", f"${order.order_tax():.2f}"])
+    data.append(["Order Total", "", f"${order.order_cost() + order.order_tax():.2f}"])
+    data.append(["Total items in the order", "", len(order)])
 
-main()
+    receipt.make_receipt(data, "receipt.pdf")
 
+if __name__ == "__main__":
+    main()

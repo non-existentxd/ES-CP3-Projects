@@ -1,6 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        "testing"
+        "ES-CP3-Projects"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
