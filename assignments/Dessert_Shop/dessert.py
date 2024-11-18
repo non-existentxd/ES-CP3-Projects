@@ -1,6 +1,7 @@
 
 from abc import ABC, abstractmethod
 
+
 class DessertItem(ABC):
     tax_percent = 7.25
 

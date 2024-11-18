@@ -1,5 +1,6 @@
-import receipt
 from dessert import Candy, Cookie, IceCream, Sundae, Order
+from receipt import *
+
 
 def main():
     order = Order()
