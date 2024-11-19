@@ -146,12 +146,27 @@ def main():
                 print('Invalid response: Please enter a choice from the menu (1-4) or Enter')
     print()
 
-    if order.items:
-        print("\nGenerating receipt...")
-        generate_receipt(order)
+
+
+
+    order_items = []
+    for item in order.items:
+        order_items.append({
+                "name": item.name,
+                "cost": item.calculate_cost(),
+                "tax": item.calculate_tax()
+            })
+
+        subtotal = order.calculate_subtotal()
+        tax = order.calculate_total_tax()
+        total = order.calculate_total_cost()
+        total_items = len(order.items)
+        generate_receipt(order_items, subtotal, tax, total, total_items)
         print("Receipt saved as 'receipt.pdf'.")
     else:
         print("No items in the order. No receipt generated.")
+
+
 
 
 if __name__ == "__main__":
