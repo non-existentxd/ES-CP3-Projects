@@ -1,5 +1,5 @@
 from dessert import Order, Candy, Cookie, IceCream, Sundae
-from receipt import SimpleDocTemplate
+from receipt import generate_receipt
 
 
 class DessertShop:
@@ -148,7 +148,7 @@ def main():
 
     if order.items:
         print("\nGenerating receipt...")
-        SimpleDocTemplate(order)
+        generate_receipt(order)
         print("Receipt saved as 'receipt.pdf'.")
     else:
         print("No items in the order. No receipt generated.")
